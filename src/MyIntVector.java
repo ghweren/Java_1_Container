@@ -1,3 +1,5 @@
+import java.util.NoSuchElementException;
+
 public class MyIntVector {
     private int size;
     private int[] arr;
@@ -17,8 +19,10 @@ public class MyIntVector {
         capacity=10;
         arr=new int[capacity];
     }
-    public MyIntVector(int size)
+    public MyIntVector(int size) throws IllegalArgumentException
     {
+        if(size<0)
+            throw new IllegalArgumentException("Illegal size");
         this.size=size;
         if(size>0.5*capacity)
             capacity=2*size;
@@ -46,8 +50,10 @@ public class MyIntVector {
             arr[i]=temp[i-1];
     }
 
-    public int pop_back()
+    public int pop_back() throws NoSuchElementException
     {
+        if(size==0)
+            throw new NoSuchElementException("Vector is empty");
         int[] temp=arr.clone();
         arr=new int[capacity];
         size--;
@@ -56,8 +62,10 @@ public class MyIntVector {
         return  temp[size+1];
     }
 
-    public int pop_front()
+    public int pop_front() throws NoSuchElementException
     {
+        if(size==0)
+            throw new NoSuchElementException("Vector is empty");
         int[] temp=arr.clone();
         arr=new int[capacity];
         size--;
@@ -66,10 +74,10 @@ public class MyIntVector {
         return  temp[0];
     }
 
-    public void add(int element,int index)
+    public void add(int element,int index) throws IndexOutOfBoundsException
     {
-        if(index>size-1)
-            System.out.println("The entered index goes beyond to array");
+        if(index<0||index>size-1)
+            throw new IndexOutOfBoundsException("Index is out of bounds");
         else
         {
             size++;
@@ -81,20 +89,20 @@ public class MyIntVector {
                 arr[i]=temp[i-1];
         }
     }
-    public void replace(int element,int index)
+    public void replace(int element,int index) throws IndexOutOfBoundsException
     {
-        if(index>size-1)
-            System.out.println("The entered index goes beyond to array");
+        if(index<0||index>size-1)
+            throw new IndexOutOfBoundsException("Index is out of bounds");
         else
         {
             arr[index]=element;
         }
     }
 
-    public void delete(int index)
+    public void delete(int index) throws IndexOutOfBoundsException
     {
-        if(index>size-1)
-            System.out.println("The entered index goes beyond to array");
+        if(index<0||index>size-1)
+            throw new IndexOutOfBoundsException("Index is out of bounds");
         else
         {
             int[] temp=arr.clone();
@@ -116,13 +124,17 @@ public class MyIntVector {
         return capacity;
     }
 
-    public int get(int index)
+    public int get(int index) throws IndexOutOfBoundsException
     {
+        if(index<0||index>size-1)
+            throw new IndexOutOfBoundsException("Index is out of bounds");
             return arr[index];
     }
 
-    public void resize(int size)
+    public void resize(int size) throws IllegalArgumentException
     {
+        if(size<0)
+            throw new IllegalArgumentException("Illegal size");
         if(size>0.5*capacity)
             increase_the_capacity(size*2);
         int[] temp =arr.clone();
