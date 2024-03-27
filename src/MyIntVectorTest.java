@@ -100,7 +100,27 @@ class MyIntVectorTest {
     }
 
     @org.junit.jupiter.api.Test
-    void pop_front() {
+    void pop_front_then_empty() {
+        try {
+            testVector.pop_front();
+        }
+        catch (Exception e)
+        {
+            assertEquals("Vector is empty",e.getMessage());
+        }
+    }
+
+    @Test
+    void often_pop_front()
+    {
+        testVector.push_front(1);
+        testVector.push_front(2);
+        testVector.push_front(3);
+        int elem =testVector.pop_front();
+        assertEquals(3,elem);
+        assertArrayEquals(new int[]{2,1},testVector.toArray());
+        assertEquals(2,testVector.getSize());
+        assertEquals(10,testVector.getCapacity());
     }
 
     @org.junit.jupiter.api.Test
