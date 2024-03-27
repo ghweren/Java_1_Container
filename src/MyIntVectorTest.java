@@ -211,18 +211,74 @@ class MyIntVectorTest {
     }
 
     @org.junit.jupiter.api.Test
-    void getSize() {
+    void getSize_if_empty() {
+        assertEquals(0,testVector.getSize());
+    }
+
+    @Test
+    void often_getSize()
+    {
+        testVector.push_back(1);
+        testVector.push_back(2);
+        testVector.push_back(3);
+        assertEquals(3,testVector.getSize());
     }
 
     @org.junit.jupiter.api.Test
     void getCapacity() {
+        assertEquals(10,testVector.getCapacity());
+    }
+
+
+    @org.junit.jupiter.api.Test
+    void get_if_out_of_bounds() throws RuntimeException
+    {
+        try {
+            testVector.get(0);
+            throw new RuntimeException("Invalid operation");
+        }
+        catch (IndexOutOfBoundsException e)
+        {
+            assertEquals("Index is out of bounds",e.getMessage());
+        }
+    }
+
+    @Test
+    void often_get()
+    {
+        testVector.push_back(1);
+        testVector.push_back(2);
+        testVector.push_back(3);
+        assertEquals(3,testVector.get(2));
     }
 
     @org.junit.jupiter.api.Test
-    void get() {
+    void often_resize() {
+        testVector.resize(4);
+        assertEquals(4,testVector.getSize());
+        assertEquals(10,testVector.getCapacity());
     }
 
-    @org.junit.jupiter.api.Test
-    void resize() {
+    @Test
+    void resize_if_higher_capacity()
+    {
+        testVector.resize(6);
+        assertEquals(6,testVector.getSize());
+        assertEquals(12,testVector.getCapacity());
+    }
+
+    @Test
+    void toArray_if_empty()
+    {
+        assertArrayEquals(new int[]{},testVector.toArray());
+    }
+
+    @Test
+    void often_toArray()
+    {
+        testVector.push_back(1);
+        testVector.push_back(2);
+        testVector.push_back(3);
+        assertArrayEquals(new int[]{1,2,3},testVector.toArray());
     }
 }
