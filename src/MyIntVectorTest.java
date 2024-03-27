@@ -124,7 +124,37 @@ class MyIntVectorTest {
     }
 
     @org.junit.jupiter.api.Test
-    void add() {
+    void add_if_higher_size() {
+        try{
+            testVector.add(1,0);
+        }
+        catch (Exception e)
+        {
+            assertEquals("Index is out of bounds",e.getMessage());
+        }
+    }
+
+    @Test
+    void often_add()
+    {
+        testVector.push_back(1);
+        testVector.push_back(2);
+        testVector.push_back(3);
+        testVector.add(4,2);
+        assertArrayEquals(new int[]{1,2,4,3},testVector.toArray());
+        assertEquals(4,testVector.getSize());
+        assertEquals(10,testVector.getCapacity());
+    }
+
+    @Test
+    void add_then_higher_capacity()
+    {
+        testVector.push_back(8);
+        for(int i = 0;i<8;i++)
+            testVector.add(i,0);
+        assertArrayEquals(new int[]{7,6,5,4,3,2,1,0,8},testVector.toArray());
+        assertEquals(9,testVector.getSize());
+        assertEquals(20,testVector.getCapacity());
     }
 
     @org.junit.jupiter.api.Test
