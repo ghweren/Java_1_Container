@@ -158,7 +158,26 @@ class MyIntVectorTest {
     }
 
     @org.junit.jupiter.api.Test
-    void replace() {
+    void replace_if_higher_size() {
+        try{
+            testVector.replace(1,0);
+        }
+        catch (Exception e)
+        {
+            assertEquals("Index is out of bounds",e.getMessage());
+        }
+    }
+
+    @Test
+    void often_replace()
+    {
+        testVector.push_back(1);
+        testVector.push_back(2);
+        testVector.push_back(3);
+        testVector.replace(4,2);
+        assertArrayEquals(new int[]{1,2,4},testVector.toArray());
+        assertEquals(3,testVector.getSize());
+        assertEquals(10,testVector.getCapacity());
     }
 
     @org.junit.jupiter.api.Test
