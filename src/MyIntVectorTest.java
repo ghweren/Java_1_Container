@@ -2,6 +2,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MyIntVectorTest {
@@ -74,7 +76,27 @@ class MyIntVectorTest {
     }
 
     @org.junit.jupiter.api.Test
-    void pop_back() {
+    void pop_back_then_empty() {
+        try {
+            testVector.pop_back();
+        }
+        catch (Exception e)
+        {
+            assertEquals("Vector is empty",e.getMessage());
+        }
+    }
+
+    @Test
+    void often_pop_back()
+    {
+        testVector.push_front(1);
+        testVector.push_front(2);
+        testVector.push_front(3);
+        int elem =testVector.pop_back();
+        assertEquals(1,elem);
+        assertArrayEquals(new int[]{3,2},testVector.toArray());
+        assertEquals(2,testVector.getSize());
+        assertEquals(10,testVector.getCapacity());
     }
 
     @org.junit.jupiter.api.Test

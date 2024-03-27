@@ -59,7 +59,7 @@ public class MyIntVector {
         size--;
         for(int i =0;i<size;i++)
             arr[i]=temp[i];
-        return  temp[size+1];
+        return  temp[size];
     }
 
     public int pop_front() throws NoSuchElementException
