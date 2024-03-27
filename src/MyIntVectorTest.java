@@ -1,10 +1,8 @@
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.NoSuchElementException;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MyIntVectorTest {
 
@@ -281,4 +279,5 @@ class MyIntVectorTest {
         testVector.push_back(3);
         assertArrayEquals(new int[]{1,2,3},testVector.toArray());
     }
+
 }
