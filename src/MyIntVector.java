@@ -8,8 +8,8 @@ public class MyIntVector {
     private void increase_the_capacity(int capacity)
     {
         int[] temp = arr.clone();
-        capacity*=2;
-        arr = new int[capacity*2];
+        this.capacity=capacity;
+        arr = new int[capacity];
         for(int i=0;i<size;i++)
             arr[i]=temp[i];
     }
@@ -146,5 +146,12 @@ public class MyIntVector {
             for(int i=0;i<this.size;i++)
                 arr[i]=temp[i];
         this.size=size;
+    }
+    public int[] toArray()
+    {
+        int[] result = new int[size];
+        for(int i=0;i<size;i++)
+            result[i]=arr[i];
+       return result;
     }
 }
