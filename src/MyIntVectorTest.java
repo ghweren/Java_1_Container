@@ -124,11 +124,13 @@ class MyIntVectorTest {
     }
 
     @org.junit.jupiter.api.Test
-    void add_if_higher_size() {
+    void add_if_out_of_bounds() throws RuntimeException
+    {
         try{
             testVector.add(1,0);
+            throw new RuntimeException("Invalid operation");
         }
-        catch (Exception e)
+        catch (IndexOutOfBoundsException e)
         {
             assertEquals("Index is out of bounds",e.getMessage());
         }
@@ -158,14 +160,18 @@ class MyIntVectorTest {
     }
 
     @org.junit.jupiter.api.Test
-    void replace_if_higher_size() {
+    void replace_if_out_of_bounds() throws RuntimeException
+    {
         try{
             testVector.replace(1,0);
+            throw new RuntimeException("Invalid operation");
         }
-        catch (Exception e)
+        catch (IndexOutOfBoundsException e)
         {
             assertEquals("Index is out of bounds",e.getMessage());
         }
+
+
     }
 
     @Test
@@ -181,7 +187,27 @@ class MyIntVectorTest {
     }
 
     @org.junit.jupiter.api.Test
-    void delete() {
+    void delete_if_out_of_bounds() throws RuntimeException {
+        try{
+            testVector.delete(0);
+            throw new RuntimeException("Invalid operation");
+        }
+        catch(IndexOutOfBoundsException e)
+        {
+            assertEquals("Index is out of bounds",e.getMessage());
+        }
+    }
+
+    @Test
+    void often_delete()
+    {
+        testVector.push_back(1);
+        testVector.push_back(2);
+        testVector.push_back(3);
+        testVector.delete(1);
+        assertArrayEquals(new int[]{1,3},testVector.toArray());
+        assertEquals(2,testVector.getSize());
+        assertEquals(10,testVector.getCapacity());
     }
 
     @org.junit.jupiter.api.Test
